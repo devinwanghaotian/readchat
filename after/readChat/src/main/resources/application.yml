@@ -39,8 +39,8 @@ mybatis:
 
 # 设置 JWT 密钥和过期时间 过期时间为100年
 jwt:
-  expire: 3075840000000
-  signKey: ojDIyCjvaE
+  expire: 
+  signKey: 
 
 # 微信的相关密钥
 
