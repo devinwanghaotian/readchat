@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.devinwang.readChat.mapper.ArticleMapper">
+
+<!--  增加文章  -->
+    <insert id="add" useGeneratedKeys="true" keyProperty="articleId">
+        INSERT INTO article(article_id, article_content, user_id) VALUES (null, #{articleContent}, #{userId})
+    </insert>
+    <!--  分页查询  -->
+    <select id="selectByPage" resultType="top.devinwang.readChat.entity.vo.ArticleVo">
+        SELECT article_id, article_content, motto, openid, article.gmt_create, nick_name, avatar_url
+        FROM auth_user, article
+        WHERE article_id &lt; #{currentIdx} AND user_id = openid
+        ORDER BY article_id DESC
+        LIMIT #{pageSize}
+    </select>
+<!-- 查询用户详情页的文章 -->
+    <select id="selectByOpenidAndPage" resultType="top.devinwang.readChat.entity.vo.ArticleVo">
+        SELECT a.article_id,
+               a.article_content,
+               a.gmt_create,
+               u.motto,
+               u.openid,
+               u.nick_name,
+               u.avatar_url
+        FROM auth_user u LEFT JOIN article a ON u.openid = #{openid} AND a.user_id = u.openid
+        WHERE
+            a.article_id &lt; #{currentIdx}
+        ORDER BY
+            a.article_id DESC
+        LIMIT
+            #{pageSize}
+    </select>
+
+    <select id="getUserAndArticleByArticleId" resultType="top.devinwang.readChat.entity.vo.ArticleDetailVo">
+        SELECT
+            u.openid,
+            u.avatar_url,
+            u.nick_name,
+            u.gmt_create user_gmt_create,
+            u.motto,
+            a.article_id,
+            a.article_content,
+            a.gmt_create article_gmt_create
+        FROM article a LEFT JOIN auth_user u ON a.user_id = u.openid
+        WHERE a.article_id = #{articleId}
+    </select>
+
+    <select id="getArticleVOByArticleId" resultType="top.devinwang.readChat.entity.vo.ArticleVo">
+        SELECT
+            u.openid,
+            u.motto,
+            u.avatar_url,
+            u.nick_name,
+            a.article_id,
+            a.article_content,
+            a.gmt_create
+        FROM article a LEFT JOIN  auth_user u ON a.user_id = u.openid
+        WHERE a.article_id = #{articleId}
+    </select>
+    <select id="getCollectByPage" resultType="top.devinwang.readChat.entity.vo.ArticleVo">
+        SELECT
+            a.article_id, a.article_content, a.gmt_create , u.motto, u.openid, u.nick_name, u.avatar_url
+        FROM article a LEFT JOIN auth_user u ON a.user_id = u.openid
+        WHERE article_id in
+            <foreach item="articleId" index="index" collection="queryList" open="(" separator="," close=")">
+                #{articleId}
+            </foreach>
+        ORDER BY FIELD(article_id, 
+            <foreach collection="queryList" separator="," item="articleId">
+                #{articleId}
+            </foreach>
+            )
+    </select>
+
+    <select id="getDynamicByPage" resultType="top.devinwang.readChat.entity.vo.ArticleVo">
+        SELECT
+            a.article_id, a.article_content, a.gmt_create , u.motto, u.openid, u.nick_name, u.avatar_url
+        FROM article a LEFT JOIN auth_user u
+        ON a.user_id = u.openid
+        WHERE
+            a.article_id IN
+                <foreach item="articleId" index="index" collection="articleIdList" open="(" separator="," close=")">
+                    #{articleId}
+                </foreach>
+        ORDER BY FIELD(a.article_id,
+            <foreach item="articleId" collection="articleIdList" separator=",">
+                #{articleId}
+            </foreach>)
+    </select>
+
+    <select id="getCommentsByArticleId" resultType="top.devinwang.readChat.entity.vo.CommentVo">
+        SELECT
+            c.id, c.article_id, u.avatar_url, u.nick_name, c.content, c.gmt_update, c.reply_id, c.reply_name, c.pid
+        FROM comment c LEFT JOIN auth_user u ON c.openid = u.openid
+        WHERE
+            c.article_id = #{articleId}
+    </select>
+
+    <insert id="addComment" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO comment (article_id, pid, openid, reply_id, reply_name, content)
+        VALUES (#{articleId}, #{pid}, #{openid}, #{replyId}, #{replyName}, #{content})
+    </insert>
+
+    <select id="getComment" resultType="top.devinwang.readChat.entity.vo.CommentVo">
+        SELECT
+            c.id, c.article_id, u.avatar_url, u.nick_name, c.content, c.gmt_update, c.reply_id, c.reply_name, c.pid
+        FROM comment c LEFT JOIN auth_user u ON c.openid = u.openid
+        WHERE c.id = #{id}
+    </select>
+    <select id="getMyCommentByPage" resultType="top.devinwang.readChat.entity.Comment">
+        SELECT id, article_id, content, gmt_update
+        FROM comment
+        WHERE openid = #{openid}
+        ORDER BY gmt_update DESC
+    </select>
+
+    <delete id="deleteCommentById">
+        DELETE FROM comment WHERE id = #{id}
+    </delete>
+
+    <select id="getMyArticleByPage" resultType="top.devinwang.readChat.entity.vo.ArticleVo">
+        SELECT a.article_id,
+               a.article_content,
+               a.gmt_create,
+               u.motto,
+               u.openid,
+               u.nick_name,
+               u.avatar_url
+        FROM auth_user u LEFT JOIN article a ON a.user_id = #{openid} AND a.user_id = u.openid
+        WHERE
+            a.user_id = #{openid}
+        ORDER BY
+            a.gmt_update DESC
+    </select>
+
+    <delete id="deleteArticleById">
+        DELETE FROM article WHERE article_id = #{articleId}
+    </delete>
+
+    <delete id="delCommentByArticleId">
+        DELETE FROM comment WHERE article_id = #{articleId}
+    </delete>
+
+    <delete id="delArticleLikeByArticleId">
+        DELETE FROM article_like WHERE article_id = #{articleId}
+    </delete>
+
+    <delete id="delCollectByArticleId">
+        DELETE FROM article_collect WHERE article_id = #{articleId}
+    </delete>
+    <delete id="delHotspotByArticleId">
+        DELETE FROM article_hotspot WHERE article_id = #{articleId}
+    </delete>
+
+</mapper>

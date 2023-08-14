@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.devinwang.readChat.mapper.AuthUserMapper">
+
+  <!-- 查询所有用户 -->
+  <select id="selectAll" resultType="top.devinwang.readChat.entity.AuthUser">
+    select * from auth_user
+  </select>
+
+  <!-- 根据 openid 查询单个用户 -->
+  <select id="selectByOpenId" resultType="top.devinwang.readChat.entity.AuthUser">
+    select * from auth_user where openid=#{openid}
+  </select>
+
+  <!-- 查询符合 openid 的数量，0表示没有该用户，1表示有该用户 -->
+  <select id="countOfOpenId" resultType="java.lang.Integer">
+    select count(*) from auth_user where openid=#{openid}
+  </select>
+  <!-- 如果有该数据就插入，没这数据就更新 -->
+  <insert id="insertOrUpdate">
+    replace into auth_user(openid, nick_name, avatar_url) values (#{openid}, #{nickName}, #{avatarUrl})
+  </insert>
+</mapper>

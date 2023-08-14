@@ -1,0 +1,85 @@
+<wxs module="public" src="../../wxs/public.wxs"></wxs>
+<van-dialog use-slot title="读书讨论会小程序隐私保护指引" show="{{ show }}" show-cancel-button bind:confirm="onConfirm1" bind:cancel="onClose1">
+    <scroll-view scroll-y="true" style="line-height: 40rpx; width: 570rpx; height:700rpx; margin-top: 20rpx; font-size: small; margin-left: 20rpx; ">
+        <view>本指引是读书讨论会小程序开发者 （以下简称“开发者”）为处理你的个人信息而制定。</view>
+        <text>\n</text>
+        <view style="font-size: medium;">1. 开发者处理的信息</view>
+        <view>根据法律规定，开发者仅处理实现小程序功能所必要的信息。</view>
+        <view>开发者 收集你选中的照片或视频信息，用于小程序的效果展示。</view>
+        <text>\n</text>
+
+        <view style="font-size: medium;">2. 你的权益</view>
+        <view> 2.1 关于收集你选中的照片或视频信息、收集你选中的照片或视频信息，你可以通过以下路径：小程序主页右上角“...” — “设置” — “小程序已获取的信息” — 点击特定信息 — 点击“通知开发者删除”，开发者承诺收到通知后将删除信息。</view>
+        <view>2.2 关于你的个人信息，你可以通过以下方式与开发者联系，行使查阅、复制、更正、删除等法定权利。</view>
+        <view> 2.3 若你在小程序中注册了账号，你可以通过以下方式与开发者联系，申请注销你在小程序中使用的账号。在受理你的申请后，开发者承诺在十五个工作日内完成核查和处理，并按照法律法规要求处理你的相关信息。</view>
+        <view>电话:18235564135></view>
+        <text>\n</text>
+
+        <view style="font-size: medium;">3. 开发者对信息的存储</view>
+        <view>3.1 开发者承诺，除法律法规另有规定外，开发者对你的信息的保存期限应当为实现处理目的所必要的最短时间。</view>
+        <text>\n</text>
+
+        
+        <view style="font-size: medium;">4. 信息的使用规则</view>
+        <view>4.1 开发者将会在本指引所明示的用途内使用收集的信息。</view>
+        <view>4.2 如开发者使用你的信息超出本指引目的或合理范围，开发者必须在变更使用目的或范围前，再次以短信方式告知并征得你的明示同意。</view> 
+        <text>\n</text>
+
+        
+        <view style="font-size: medium;">5. 信息对外提供</view>
+        <view>5.1 开发者承诺，不会主动共享或转让你的信息至任何第三方，如存在确需共享或转让时，开发者应当直接征得或确认第三方征得你的单独同意。</view>
+        <view>5.2 开发者承诺，不会对外公开披露你的信息，如必须公开披露时，开发者应当向你告知公开披露的目的、披露信息的类型及可能涉及的信息，并征得你的单独同意。</view>
+        <text>\n</text>
+
+        <view style="font-size: medium;">6. 你认为开发者未遵守上述约定，或有其他的投诉建议、或未成年人个人信息保护相关问题，可通过以下方式与开发者联系；或者向微信进行投诉。</view>
+        <view>电话 : 18235564135</view>
+
+        <view style="text-align: right;">更新日期：2023-08-12</view>
+
+        <view style="text-align: right;">生效日期：2023-08-12</view>
+    </scroll-view>
+</van-dialog>
+
+<van-dialog message="确认将退出小程序" title="您确定退出码" show="{{ showShow }}" show-cancel-button bind:confirm="onConfirm2" bind:cancel="onClose2"></van-dialog>
+
+
+<!-- 顶部的导航栏 -->
+<van-notice-bar text="读书讨论会今天开始运营了! ! ! 😊😊😊" speed="150" scrollable backgroundColor="#f6e4c4" color="#000000" />
+<view class="exchange">
+    <image class="image" src="../../images/exchange.png" mode="widthFix"></image>
+</view>
+<!-- 内容区 -->
+<view class="all" wx:for="{{article}}" wx:key="id">
+    <view class="body">
+        <view>
+            <view class="user_message" bindtap="clickUser" id="{{item.openid}}">
+                <view class="user_image">
+                    <image src="{{item.avatarUrl}}" />
+                </view>
+                <view class="message_detail">
+                    <view class="user_name">{{item.nickName}}</view>
+                    <view class="intro">{{item.motto}}</view>
+                </view>
+            </view>
+            <view bindtap="clickArticle" id="{{item.articleId}}">
+                <view class="content">
+                    <rich-text nodes="{{item.articleContent}}"></rich-text>
+                </view>
+                <view class="foot">
+                    <view class="look">共有 {{item.pageViews}} 次浏览</view>
+                    <view class="time">{{item.gmtCreate}}</view>
+                </view>
+            </view>
+        </view>
+
+    </view>
+</view>
+<!-- 右下角的图标，用于转到写作页面 -->
+<view class="writing" bindtap="writingOnclick">
+    <text class="iconfont icon-yongyan"></text>
+</view>
+<!-- 下面的加载条 -->
+<view class="loading">
+    <van-loading type="spinner" size="30px" wx:if="{{loading}}">加载中...</van-loading>
+    <view wx:else>没有更多了😀</view>
+</view>

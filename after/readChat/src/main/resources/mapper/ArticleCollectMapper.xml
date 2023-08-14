@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.devinwang.readChat.mapper.ArticleCollectMapper">
+
+    <insert id="addMultiArticleCollect">
+        INSERT INTO article_collect (article_id, openid, gmt_update)
+        VALUES
+        <foreach item="item" index="index" collection="articleCollectList" separator=",">
+            (
+            #{item.articleId},
+            #{item.openid},
+            NOW()
+            )
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        gmt_update = NOW()
+    </insert>
+</mapper>

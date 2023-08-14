@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.devinwang.readChat.mapper.ArticleLikeMapper">
+    <insert id="addMultiArticleLike">
+        INSERT INTO article_like (article_id, openid, gmt_update)
+        VALUES
+        <foreach item="item" index="index" collection="articleLikeList" separator=",">
+            (
+            #{item.articleId},
+            #{item.openid},
+            NOW()
+            )
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        gmt_update = NOW()
+    </insert>
+</mapper>

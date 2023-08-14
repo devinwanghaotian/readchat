@@ -1,0 +1,36 @@
+<view class="top">
+    <image class="image" src="../../../images/collect.png" mode="widthFix"></image>
+    <text class="txt">---我的收藏夹---</text>
+</view>
+
+
+<view class="all" wx:for="{{article}}" wx:key="id">
+    <view class="body">
+        <view>
+            <view class="user_message" bindtap="clickUser" id="{{item.openid}}">
+                <view class="user_image">
+                    <image src="{{item.avatarUrl}}" />
+                </view>
+                <view class="message_detail">
+                    <view class="user_name">{{item.nickName}}</view>
+                    <view class="intro">{{item.motto}}</view>
+                </view>
+            </view>
+            <view bindtap="clickArticle" id="{{item.articleId}}">
+                <view class="content">
+                    <rich-text nodes="{{item.articleContent}}"></rich-text>
+                </view>
+                <view class="foot">
+                    <view class="look">共有 {{item.pageViews}} 次浏览</view>
+                    <view class="time">{{item.gmtCreate}}</view>
+                </view>
+            </view>
+        </view>
+
+    </view>
+</view>
+<!-- 下面的加载条 -->
+<view class="loading">
+    <van-loading type="spinner" size="30px" wx:if="{{loading}}">加载中...</van-loading>
+    <view wx:else>没有更多了😀</view>
+</view>

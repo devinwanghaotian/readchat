@@ -1,0 +1,37 @@
+<view class="header">
+    <text class="txt">我的文章</text>
+</view>
+
+<!-- 内容区 -->
+<view class="all" wx:for="{{article}}" wx:key="id">
+    <view class="body">
+        <view>
+            <view class="user_message" bindtap="clickArticle" data-id="{{item.articleId}}" id="{{item.openid}}">
+                <view class="user_image">
+                    <image src="{{item.avatarUrl}}" />
+                </view>
+                <view class="message_detail">
+                    <view class="user_name">{{item.nickName}}</view>
+                    <view class="intro">{{item.motto}}</view>
+                </view>
+            </view>
+            <view id="{{item.articleId}}">
+                <view class="content" bindtap="clickArticle" data-id="{{item.articleId}}">
+                    <rich-text nodes="{{item.articleContent}}"></rich-text>
+                </view>
+                <view class="foot">
+                    <view class="look" bindtap="clickArticle" data-id="{{item.articleId}}"><text class="txt">共有 {{item.pageViews}} 次浏览</text></view>
+                    <view class="time" bindtap="clickArticle" data-id="{{item.articleId}}"><text class="txt">{{item.gmtCreate}}</text></view>
+                    <van-button round class="delButton" type="danger" size="mini" data-id="{{item.articleId}}" bindtap="delete">删除</van-button>
+                </view>
+            </view>
+        </view>
+
+    </view>
+</view>
+
+<!-- 下面的加载条 -->
+<view class="loading">
+    <van-loading type="spinner" size="30px" wx:if="{{loading}}">加载中...</van-loading>
+    <view wx:else>没有更多了😀</view>
+</view>

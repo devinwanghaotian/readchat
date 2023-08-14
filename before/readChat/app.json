@@ -1,0 +1,55 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/logs/logs",
+        "pages/me/me",
+        "pages/article/article",
+        "pages/article/add_deails/add_details",
+        "pages/article_detail/article_detail",
+        "pages/user_detail/user_detail",
+        "pages/me/collect/collect",
+        "pages/dynamic/dynamic",
+        "pages/me/myArticle/myArticle",
+        "pages/me/myComment/myComment"
+    ],
+    "window": {
+        "backgroundTextStyle": "dark",
+        "navigationBarBackgroundColor": "#90b5f8",
+        "navigationBarTitleText": "读书分享会",
+        "navigationBarTextStyle": "white"
+    },
+    "tabBar": {
+        "color": "#00000",
+        "selectedColor": "#1296db",
+        "list": [
+            {
+                "selectedIconPath": "images/dynamic_on.png",
+                "iconPath": "images/dynamic.png",
+                "pagePath": "pages/dynamic/dynamic",
+                "text": "动态"
+            },
+            {
+                "selectedIconPath": "images/index_on.png",
+                "iconPath": "images/index.png",
+                "pagePath": "pages/index/index",
+                "text": "首页"
+            },
+            {
+                "selectedIconPath": "images/me_on.png",
+                "iconPath": "images/me.png",
+                "pagePath": "pages/me/me",
+                "text": "我的"
+            }
+        ]
+    },
+    "sitemapLocation": "sitemap.json",
+    "usingComponents": {
+        "van-button": "@vant/weapp/button/index",
+        "van-dialog": "@vant/weapp/dialog/index",
+        "van-icon": "@vant/weapp/icon",
+        "van-notice-bar": "@vant/weapp/notice-bar",
+        "van-field": "@vant/weapp/field",
+        "van-loading": "@vant/weapp/loading",
+        "van-skeleton": "@vant/weapp/skeleton/index"
+    }
+}

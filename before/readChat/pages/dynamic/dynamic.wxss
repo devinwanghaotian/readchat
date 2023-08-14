@@ -1,0 +1,102 @@
+.header {
+    margin-top: 20rpx;
+    margin-left: 30rpx;
+    margin-bottom: 30rpx;
+}
+.header .txt {
+    display: block;
+    position: relative;
+    text-align: left;
+    font-size: 50rpx;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bolder;
+}
+
+.header .txt::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 250rpx;
+    height: 15rpx;
+    background-color: #CCCCFF;
+    bottom: -10rpx;
+    left: 0%;
+    border-radius: 10rpx;
+  }
+
+  .all {
+    margin-top: 30rpx;
+}
+
+.body {
+    z-index: 9999999999999;
+    /* margin: 20rpx; */
+    margin-left: 40rpx;
+    margin-right: 40rpx;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 20rpx;
+    padding: 30rpx;
+    margin-bottom: 10rpx;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, .5);
+}
+
+.body .content {
+    margin-top: 10rpx;
+    position: relative;
+    max-height: 50vh;
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    display: -webkit-box;
+    /* 超出隐藏 */
+    overflow: hidden;
+    /*超出显示为省略号*/
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+}
+
+.body .foot {
+    font-weight: 200;
+    font-size: 25rpx;
+    margin-top: 20rpx;
+    display: flex;
+    justify-content: space-between;
+}
+
+.user_message {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.user_message .user_image image {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+}
+
+.message_detail {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10rpx;
+}
+
+.user_name {
+    font-size: 30rpx;
+    font-weight: 800;
+}
+
+.message_detail .intro {
+    font-weight: 200;
+    width: 500rpx;
+    font-size: 25rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.loading {
+  text-align: center;
+  padding-top: 20rpx;
+  padding-bottom: 30rpx;
+}

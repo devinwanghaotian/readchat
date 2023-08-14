@@ -1,0 +1,5 @@
+page {
+    background-color: #bbf1fa;
+    background-attachment:fixed;
+    position: relative;
+}

@@ -1,0 +1,21 @@
+<view class="header">
+    <text class="txt">我的评论</text>
+</view>
+
+<view class="body">
+    <view class="piece" wx:for="{{commentList}}" wx:key="id">
+        <view class="comment" bindtap="clickArticle" data-id="{{item.articleId}}">
+            <text class="txt">{{item.content}}</text>
+        </view>
+        <view class="foot">
+            <view class="time">{{item.gmtUpdate}}</view>
+            <van-button round type="danger" size="mini" data-id="{{item.id}}" bindtap="delete">删除</van-button>
+        </view>
+    </view>
+</view>
+
+<!-- 下面的加载条 -->
+<view class="loading">
+    <van-loading type="spinner" size="30px" wx:if="{{loading}}">加载中...</van-loading>
+    <view wx:else>没有更多了😀</view>
+</view>

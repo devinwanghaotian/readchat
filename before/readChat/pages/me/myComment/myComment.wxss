@@ -1,0 +1,53 @@
+.header {
+    margin-top: 20rpx;
+    margin-left: 30rpx;
+    margin-bottom: 30rpx;
+}
+
+.header .txt {
+    display: block;
+    position: relative;
+    text-align: left;
+    font-size: 50rpx;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bolder;
+}
+
+.header .txt::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 250rpx;
+    height: 15rpx;
+    background-color: #CCCCFF;
+    bottom: -10rpx;
+    left: 0%;
+    border-radius: 10rpx;
+}
+
+.body {
+    margin-left: 30rpx;
+    margin-right: 30rpx;
+    border-top:1rpx dashed gray;
+}
+
+.piece {
+    margin-top: 20rpx;
+}
+
+.body .foot {
+    margin-top: 20rpx;
+    padding-top: 5rpx;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 200;
+    font-size: 30rpx;
+    padding-bottom: 20rpx;
+    border-bottom:1rpx dashed gray;
+}
+
+.loading {
+    text-align: center;
+    padding-top: 20rpx;
+    padding-bottom: 30rpx;
+}

@@ -1,0 +1,32 @@
+<view>
+    <view class="user_message_detail main">
+        <view class="user_image">
+            <image src="{{user.avatarUrl}}" />
+        </view>
+        <view class="user_detail">
+            <view class="user_name">
+                {{user.nickName}}
+            </view>
+            <view class="user_address" bind:tap="changeMessage">{{user.motto}}</view>
+            <view class="user_address">{{user.gmtCreate+'入驻'}}</view>
+        </view>
+        <van-button wx:if="{{attention == false}}" icon="plus" round type="info" bindtap="tapAttention">关注</van-button>
+        <van-button wx:else icon="wap-nav" round type="info" plain bindtap="tapAttention">已关注</van-button>
+    </view>
+    <block wx:for="{{article}}" wx:key="id">
+        <view class="body" bind:tap="messageDetail" id="{{item.articleId}}">
+            <view class="content">
+                <rich-text nodes="{{item.articleContent}}"></rich-text>
+            </view>
+            <view class="foot" bindtap="clickArticle">
+                <view class="look">共有 {{item.pageViews == null ? 0 : item.pageViews}} 次浏览</view>
+                <view class="time">{{item.gmtCreate}}</view>
+            </view>
+        </view>
+    </block>
+ <!-- 下面的加载条 -->
+    <view class="loading">
+        <van-loading type="spinner" size="30px" wx:if="{{loading}}">加载中...</van-loading>
+        <view wx:else>没有更多了😀</view>
+    </view>
+</view>

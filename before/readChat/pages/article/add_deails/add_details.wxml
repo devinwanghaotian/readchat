@@ -1,0 +1,10 @@
+<view>
+		<navbar title="预览" loading="{{true}}" home="{{true}}" back="{{true}}"></navbar>
+</view>
+<!-- //这里data中article为bindName -->
+<scroll-view scroll-y="{{true}}" style="height:calc(100vh - {{navTop+'px'}} - 34px);">
+		<view style="padding:20rpx">
+		<rich-text nodes="{{article}}" bindtap="previewImage"></rich-text>
+				<!-- <wxparser rich-text="{{article}}" /> -->
+		</view>
+</scroll-view>

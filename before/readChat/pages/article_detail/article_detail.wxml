@@ -1,0 +1,75 @@
+<!-- 骨架屏 -->
+<van-skeleton title row="20" loading="{{ loading }}">
+    <view class="user_message_detail header">
+        <view class="user_image" bindtap="clickUser">
+            <image src="{{user.avatarUrl}}" />
+        </view>
+        <view class="user_detail" bindtap="clickUser">
+            <view class="user_name">
+                {{user.nickName}}
+            </view>
+            <view class="user_address" bind:tap="changeMessage">{{user.motto}}</view>
+            <view class="user_address">{{user.gmtCreate+'入驻'}}</view>
+        </view>
+        <van-button wx:if="{{attention == false}}" icon="plus" round type="info" bindtap="tapAttention">关注</van-button>
+        <van-button wx:else icon="wap-nav" round type="info" plain bindtap="tapAttention">已关注</van-button>
+    </view>
+
+    <!-- //这里data中article为bindName -->
+    <scroll-view class="content" scroll-y="{{true}}" style="height:calc(100vh - {{navTop+'px'}} - 34px);">
+        <view style="padding:20rpx">
+            <rich-text nodes="{{article.articleContent}}" bindtap="previewImage"></rich-text>
+            <text class="time">{{article.time}}</text>
+        </view>
+    </scroll-view>
+
+    <!-- 评论-回复-回复评论显示区域 -->
+    <view class="container">
+        <!-- 总共评论数 -->
+        <view class="total">共{{comment_list.length + comment_list2.length}}条评论</view>
+        <!-- END -->
+        <!-- 用户评论回复显示区域 -->
+        <view class="container-item" wx:for="{{comment_list}}" wx:for-item="list" wx:key="key">
+            <image class="item_img" src="{{list.avatarUrl}}"></image>
+            <view class="item_right">
+                <view class="right_name">{{list.nickName}}</view>
+                <view class="right_content">
+                    <text class="right_content_txt" bindtap='replyComment' data-type="1" data-name='{{list.nickName}}' data-cid='{{list.id}}' data-pid="{{list.pid}}">{{list.content}}</text>
+                    <text class="right_content_txt2">{{list.gmtUpdate}}</text>
+                    <!-- 回复评论 -->
+                    <!-- 判断回复列表数据中的parent_id和评论列表数据的comment_id是否相等 相等就显示 不等就不显示 -->
+                    <view class="reply" wx:for="{{comment_list2}}" wx:for-item="list2" wx:key="list2" wx:if="{{list2.pid == list.id}}">
+                        <image class="reply_img" src="{{list2.avatarUrl}}"></image>
+                        <view class="reply_right">
+                            <view class="right_name">{{list2.nickName}}</view>
+                            <text wx:if="{{list2.replyName == ''}}" class="right_content_txt" bindtap='replyComment' data-type="2" data-name='{{list2.nickName}}' data-cid='{{list2.id}}' data-pid="{{list2.pid}}">{{list2.content}}</text>
+                            <text wx:if="{{list2.replyName != ''}}" bindtap='replyComment' data-type="2" data-name='{{list2.nickName}}' data-cid='{{list2.id}}' data-pid="{{list2.pid}}" class="right_content_txt">回复 <text class="right_name">{{list2.replyName}}：</text>{{list2.content}}</text>
+                            <text class="right_content_txt2">{{list2.gmtUpdate}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!-- END -->
+        <!-- 结束 -->
+        <view class="end">
+            <text class="end_txt" space="nbsp">— THE END —</text>
+        </view>
+        <!-- END -->
+    </view>
+    <!-- END -->
+    <!-- 底部评论 -->
+    <view class="foot">
+        <view class="say">
+            <view class="flex">
+                <image class="say_img" src="/images/me.png"></image>
+                <input confirm-type="send" class="say_inp" placeholder="{{ placeholder }}" value="{{ comment_text }}" focus="{{ focus }}" bindblur="blur" bindconfirm="confirm"></input>
+            </view>
+        </view>
+        <van-icon class="{{like==true?'like':'unLike'}}" name="like" bindtap="tapLike" />
+        <text class="foot_num" bindtap="tapLike">{{likeNum}}</text>
+        <van-icon class="{{collect==true?'collect':'unCollect'}}" name="star" bindtap="tapCollect" />
+        <text class="foot_num" bindtap="tapCollect" >{{collectNum}}</text>
+    </view>
+</van-skeleton>
+<!-- END -->

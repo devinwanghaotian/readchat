@@ -1,0 +1,58 @@
+<view class="top-bg"></view>
+<view class="box">
+  <!-- 头像 -->
+  <view class="head-box">
+    <button class="avatar">
+      <image class="head-img" src="{{avatarUrl}}"  mode="widthFix"></image>
+    </button>
+    <view class="tip">{{nickName}}</view>
+  </view>
+  <!-- 第一部分列表 -->
+  <view>
+    <button class="row" style="width: 100%;" bindtap="login">
+      <view class="left">
+        <view class="iconfont icon-denglu"></view>
+        <text class="text">登录</text>
+      </view>
+      <view class="right"></view>
+    </button>
+    <button class="row" style="width: 100%;" bindtap="toCollectPage">
+      <view class="left">
+        <view class="iconfont icon-wodeshoucangjia"></view>
+        <text class="text">收藏夹</text>
+      </view>
+    </button>
+    <button class="row" style="width: 100%;border-bottom: none;" bindtap="myArticle">
+      <view class="left">
+        <view class="iconfont icon-wenzhang1"></view>
+        <text class="text">我的文章</text>
+      </view>
+    </button>
+  </view>
+</view>
+<!-- 第二部分列表 -->
+<view class="end">
+  <button class="row" style="width: 100%;border-bottom: none;" bindtap="myComment">
+    <view class="left">
+      <view class="iconfont icon-pinglun"></view>
+      <text class="text">我的评论</text>
+    </view>
+  </button>
+  <button open-type="share" class="row" style="width: 100%;">
+    <view class="left">
+      <view class="iconfont icon-fenxiang"></view>
+      <text class="text">分享好友</text>
+    </view>
+  </button>
+</view>
+<!-- 第三部分列表 -->
+<view class="end" bindtap="logout">
+  <button class="row"  style="width: 100%;border-bottom: none;">
+    <view class="left">
+      <view class="iconfont icon-tuichu"></view>
+      <text class="text">退出登录</text>
+    </view>
+  </button>
+</view>
+
+
