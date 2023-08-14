@@ -5,8 +5,8 @@ server:
 spring:
   # redis
   redis:
-    host: 62.234.221.210
-    port: 2088
+    host: 
+    port: 
     database: 0
     timeout: 1800000
     password: gYEewWLM1p
@@ -20,9 +20,9 @@ spring:
   # 数据库
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://62.234.221.210:3306/read_chat?serverTimezone=GMT%2B8&useSSL=false&characterEncoding=utf-8
-    username: read_chat
-    password: nFsdzj8ZR5LeJXLN
+    url: 
+    username: 
+    password: 
     hikari:
       connection-timeout: 1800000
   jackson:
@@ -45,23 +45,22 @@ jwt:
 # 微信的相关密钥
 
 weixin:
-  appid: 'wx825685dd56d3e091'
-  secret: 'cbc66238c5242e9a0e80a50867d33e04'
+  appid: 
+  secret: 
 
 # oss相关信息
 aliyun:
   oss:
     file:
-      endpoint: oss-cn-beijing.aliyuncs.com
-      keyid: LTAI5tRs5H7TFJdo3YrrBEh1
-      keySecret: 3c3Boua5hsR4XfJEORchjDI2JA6FSz
-      bucketName: devinwang
-
+      endpoint:
+      keyid:
+      keySecret: 
+      bucketName: 
 # 百度云OCR
 baidu:
-  app_id: 31075170
-  app_key: lCOC8O6GLowRGucojjte4tk0
-  secret_key: jXAifG1hPAwlyXylyHdQXrFOjust73Q4
+  app_id:
+  app_key: 
+  secret_key: 
 
 #pagehelper分页插件配置
 pagehelper:
